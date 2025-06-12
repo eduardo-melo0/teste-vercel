@@ -65,11 +65,12 @@ def get_price_table_name(vehicle_type: str, is_metropolitan: bool) -> Optional[s
     return table_map.get(vehicle_type)
 
 # --- Endpoints da API ---
-@app.get("/api")
+# CORREÇÃO: Removido o prefixo /api dos endpoints. A Vercel já trata disso.
+@app.get("/")
 def read_root():
     return {"status": "API Python Online"}
 
-@app.get("/api/consultar-placa/{plate}")
+@app.get("/consultar-placa/{plate}")
 async def consult_plate(plate: str):
     if not PLACA_FIPE_API_KEY:
         raise HTTPException(status_code=500, detail="Chave da API de placas não configurada.")
@@ -87,7 +88,7 @@ async def consult_plate(plate: str):
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/api/calcular-cotacao")
+@app.post("/calcular-cotacao")
 def calculate_quotation(request: QuotationRequest):
     if not supabase_client:
         raise HTTPException(status_code=503, detail="Base de dados indisponível.")
