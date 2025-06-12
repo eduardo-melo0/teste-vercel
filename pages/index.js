@@ -1,0 +1,1 @@
+javascript export default function HomePage() { return ( <div> <h1>A PÁGINA FUNCIONOU</h1> <p>O build do Next.js foi concluído com sucesso.</p> </div> ); } 
